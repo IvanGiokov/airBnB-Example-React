@@ -10,28 +10,28 @@ class SearchBox extends Component {
     }
 
     changeWhere = (e) => {
-        const newState = { ... this.state }
+        const newState = { ...this.state }
         newState.where = e.target.value;
 
         this.setState(newState)
     }
 
     changeCheckIn = (e) => {
-        const newState = { ... this.state }
+        const newState = { ...this.state }
         newState.checkIn = e.target.value;
 
         this.setState(newState)
     }
 
     changeCheckOut = (e) => {
-        const newState = { ... this.state }
+        const newState = { ...this.state }
         newState.checkOut = e.target.value;
 
         this.setState(newState)
     }
 
     changeGuests = (e) => {
-        const newState = { ... this.state }
+        const newState = { ...this.state }
         newState.guests = e.target.value;
 
         this.setState(newState)

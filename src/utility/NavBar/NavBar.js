@@ -17,7 +17,7 @@ class NavBar extends Component {
                 <nav className={navBackgroundColor}>
                     <div className='row'>
                         <div className='nav-wrapper'>
-                            <Link to='/' className='left'>airBnB</Link>
+                            <Link to='/' className='brand-logo left'>airbnb</Link>
                             <ul id='nav-mobile' className='right'>
                                 <li><Link to="/">English (US)</Link></li>
                                 <li><Link to="/">$ USD</Link></li>
