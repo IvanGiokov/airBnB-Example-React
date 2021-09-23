@@ -6,7 +6,8 @@ import {
     REACT_APP_API_BASE_URL,
     GET_RECOMMENDED_CITES
 } from '../../endpoints'
-import Spinner from '../../utility/Spinner/Spinner'
+import Spinner from '../../utility/Spinner/Spinner';
+import Cities from '../../utility/City/Cities'
 
 class Home extends Component {
 
@@ -15,10 +16,13 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        const recommendedCities = await axios.get(`${REACT_APP_API_BASE_URL}/${GET_RECOMMENDED_CITES}`)
-        const newState = { ...this.state }
-        newState.cities = recommendedCities;
-        this.setState(newState)
+        const response = await axios.get(`${REACT_APP_API_BASE_URL}/${GET_RECOMMENDED_CITES}`)
+
+        if (response.statusText === "OK") {
+            const newState = { ...this.state }
+            newState.cities = response.data;
+            this.setState(newState)
+        }
     }
 
     render() {
@@ -27,6 +31,7 @@ class Home extends Component {
                 <Spinner />
             )
         }
+
         return (
             <div className='container-fluid'>
                 <div className='row'>
@@ -34,6 +39,9 @@ class Home extends Component {
                         <div className='upper-fold'>
                             <SearchBox />
                         </div>
+                    </div>
+                    <div className='col s12'>
+                        <Cities cities={this.state.cities} />
                     </div>
                 </div>
             </div>
