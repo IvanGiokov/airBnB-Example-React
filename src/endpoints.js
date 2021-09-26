@@ -8,3 +8,5 @@ export const GET_CITIES_ASIA = 'cities/asia'
 export const GET_CITIES_EXOTIC='cities/exotic'
 //ACTIVITIES
 export const GET_ACTIVITIES_TODAY = 'activities/today'
+//VENUES
+export const GET_VENUES_RECOMMENDED =  'venues/recommended'

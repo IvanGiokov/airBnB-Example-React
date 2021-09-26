@@ -8,12 +8,14 @@ import {
     GET_CITIES_EUROPE,
     GET_CITIES_ASIA,
     GET_CITIES_EXOTIC,
-    GET_ACTIVITIES_TODAY
+    GET_ACTIVITIES_TODAY,
+    GET_VENUES_RECOMMENDED,
 } from '../../endpoints'
 import Spinner from '../../utility/Spinner/Spinner';
 import Cities from '../../utility/City/Cities'
 import seedData from '../seedData'
 import Activities from '../../utility/Activity/Acitivities';
+import Venues from '../../utility/Venue/Venues'
 
 
 class Home extends Component {
@@ -23,7 +25,8 @@ class Home extends Component {
         citiesEurope: {},
         citiesAsia: {},
         citiesExotic: {},
-        activites: [],
+        activities: [],
+        venuesRecommended: {}
     }
 
     async componentDidMount() {
@@ -32,26 +35,34 @@ class Home extends Component {
         const europeCitiesURL = `${REACT_APP_API_BASE_URL}/${GET_CITIES_EUROPE}`;
         const asiaCitiesURL = `${REACT_APP_API_BASE_URL}/${GET_CITIES_ASIA}`;
         const exoticCitiesURL = `${REACT_APP_API_BASE_URL}/${GET_CITIES_EXOTIC}`;
+        const activitiesURL = `${REACT_APP_API_BASE_URL}/${GET_ACTIVITIES_TODAY}`;
+        const venuesRecommendedURL = `${REACT_APP_API_BASE_URL}/${GET_VENUES_RECOMMENDED}`
 
-        const citiesPromises = [];
+        const promises = [];
 
-        citiesPromises.push(axios.get(citiesURL));
-        citiesPromises.push(axios.get(europeCitiesURL));
-        citiesPromises.push(axios.get(asiaCitiesURL));
-        citiesPromises.push(axios.get(exoticCitiesURL));
+        promises.push(axios.get(citiesURL));
+        promises.push(axios.get(europeCitiesURL));
+        promises.push(axios.get(asiaCitiesURL));
+        promises.push(axios.get(exoticCitiesURL));
+        promises.push(axios.get(activitiesURL));
+        promises.push(axios.get(venuesRecommendedURL))
 
-        Promise.all(citiesPromises)
+        Promise.all(promises)
             .then((data) => {
                 const recCities = data[0].data;
                 const citiesEurope = data[1].data;
                 const citiesAsia = data[2].data;
                 const citiesExotic = data[3].data;
+                const activities = data[4].data;
+                const venuesRecommended = data[5].data
 
                 this.setState({
                     cities: recCities,
                     citiesEurope: citiesEurope,
                     citiesAsia: citiesAsia,
                     citiesExotic: citiesExotic,
+                    activities : activities,
+                    venuesRecommended: venuesRecommended
                 })
             })
             .catch((er) => {
@@ -62,18 +73,15 @@ class Home extends Component {
                     citiesEurope: seedData.citiesInEurope,
                     citiesAsia: seedData.citiesInAsia,
                     citiesExotic: seedData.citiesExotic,
+                    activities: seedData.activites,
+                    venuesRecommended: seedData.venuesRecommended
                 })
             })
-
-        const activitiesURL = `${REACT_APP_API_BASE_URL}/${GET_ACTIVITIES_TODAY}`;
-
-        const activites = await axios.get(activitiesURL)
-        this.setState({
-            activites: activites.data
-        })
     }
 
     render() {
+
+        console.log(this.state)
         if (this.state.cities.length === 0) {
             return (
                 <Spinner />
@@ -98,7 +106,7 @@ class Home extends Component {
                             <Cities cities={this.state.cities} header='Recommended cities for you' />
                         </div>
                         <div className='col s12'>
-                            <Activities activities={this.state.activites}/>
+                            <Activities activities={this.state.activities} header='Today in your area'/>
                         </div>
                         <div className='col s12'>
                             <Cities cities={this.state.citiesEurope.cities} header={this.state.citiesEurope.header} />
@@ -108,6 +116,9 @@ class Home extends Component {
                         </div>
                         <div className='col s12'>
                             <Cities cities={this.state.citiesExotic.cities} header={this.state.citiesExotic.header} />
+                        </div>
+                        <div className='col s12'>
+                            <Venues venues={this.state.venuesRecommended.venues} header={this.state.venuesRecommended.header}/>
                         </div>
                     </div>
                 </div>
