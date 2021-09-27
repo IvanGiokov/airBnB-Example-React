@@ -10,6 +10,7 @@ import {
     GET_CITIES_EXOTIC,
     GET_ACTIVITIES_TODAY,
     GET_VENUES_RECOMMENDED,
+    GET_VENUES_SUPERHOST,
 } from '../../endpoints'
 import Spinner from '../../utility/Spinner/Spinner';
 import Cities from '../../utility/City/Cities'
@@ -26,7 +27,8 @@ class Home extends Component {
         citiesAsia: {},
         citiesExotic: {},
         activities: [],
-        venuesRecommended: {}
+        venuesRecommended: {},
+        venuesSuperHost: {}
     }
 
     async componentDidMount() {
@@ -36,7 +38,8 @@ class Home extends Component {
         const asiaCitiesURL = `${REACT_APP_API_BASE_URL}/${GET_CITIES_ASIA}`;
         const exoticCitiesURL = `${REACT_APP_API_BASE_URL}/${GET_CITIES_EXOTIC}`;
         const activitiesURL = `${REACT_APP_API_BASE_URL}/${GET_ACTIVITIES_TODAY}`;
-        const venuesRecommendedURL = `${REACT_APP_API_BASE_URL}/${GET_VENUES_RECOMMENDED}`
+        const venuesRecommendedURL = `${REACT_APP_API_BASE_URL}/${GET_VENUES_RECOMMENDED}`;
+        const venuesSuperHostURL =  `${REACT_APP_API_BASE_URL}/${GET_VENUES_SUPERHOST}`
 
         const promises = [];
 
@@ -46,6 +49,7 @@ class Home extends Component {
         promises.push(axios.get(exoticCitiesURL));
         promises.push(axios.get(activitiesURL));
         promises.push(axios.get(venuesRecommendedURL))
+        promises.push(axios.get(venuesSuperHostURL))
 
         Promise.all(promises)
             .then((data) => {
@@ -54,7 +58,8 @@ class Home extends Component {
                 const citiesAsia = data[2].data;
                 const citiesExotic = data[3].data;
                 const activities = data[4].data;
-                const venuesRecommended = data[5].data
+                const venuesRecommended = data[5].data;
+                const venuesSuperHost = data[6].data;
 
                 this.setState({
                     cities: recCities,
@@ -62,7 +67,8 @@ class Home extends Component {
                     citiesAsia: citiesAsia,
                     citiesExotic: citiesExotic,
                     activities : activities,
-                    venuesRecommended: venuesRecommended
+                    venuesRecommended: venuesRecommended,
+                    venuesSuperHost: venuesSuperHost,
                 })
             })
             .catch((er) => {
@@ -74,14 +80,14 @@ class Home extends Component {
                     citiesAsia: seedData.citiesInAsia,
                     citiesExotic: seedData.citiesExotic,
                     activities: seedData.activites,
-                    venuesRecommended: seedData.venuesRecommended
+                    venuesRecommended: seedData.venuesRecommended,
+                    venuesSuperHost: seedData.venuesSuperHost,
+                    
                 })
             })
     }
 
     render() {
-
-        console.log(this.state)
         if (this.state.cities.length === 0) {
             return (
                 <Spinner />
@@ -119,6 +125,9 @@ class Home extends Component {
                         </div>
                         <div className='col s12'>
                             <Venues venues={this.state.venuesRecommended.venues} header={this.state.venuesRecommended.header}/>
+                        </div>
+                        <div className='col s12'>
+                            <Venues venues={this.state.venuesSuperHost.venues} header={this.state.venuesSuperHost.header}/>
                         </div>
                     </div>
                 </div>

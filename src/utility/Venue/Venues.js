@@ -1,21 +1,19 @@
 import React from "react";
 import Venue from "./Venue";
+import './Venue.css'
 
-function Venues(props) {
-    const { venues, header } = props
-
-    const venuesElements = venues.map((venue, index) => {
-        return (
-            <div className='col s3' key={index}>
-                <Venue venue={venue} />
+function Venues(props){
+    const venues = props.venues.map((venue, i)=>{
+        return(
+            <div key={i} className="col m4">
+                <Venue venue={venue} key={i} />
             </div>
         )
     })
-
-    return (
-        <div className='venues-wrapper'>
-            <h1 className='main-header-text'>{header}</h1>
-            {venuesElements}
+    return(
+        <div className="venues">
+            <h1 className="main-header-text">{props.header}</h1>
+            {venues}
         </div>
     )
 }

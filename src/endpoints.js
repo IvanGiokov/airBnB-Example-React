@@ -10,3 +10,4 @@ export const GET_CITIES_EXOTIC='cities/exotic'
 export const GET_ACTIVITIES_TODAY = 'activities/today'
 //VENUES
 export const GET_VENUES_RECOMMENDED =  'venues/recommended'
+export const GET_VENUES_SUPERHOST = 'venues/superHost'
