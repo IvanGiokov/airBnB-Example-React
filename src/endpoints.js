@@ -11,3 +11,5 @@ export const GET_ACTIVITIES_TODAY = 'activities/today'
 //VENUES
 export const GET_VENUES_RECOMMENDED =  'venues/recommended'
 export const GET_VENUES_SUPERHOST = 'venues/superHost'
+export const GET_SINGLE_VENUE = 'venue'
+export const GET_POINTS = 'points/get'

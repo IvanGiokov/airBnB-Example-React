@@ -754,7 +754,19 @@ const seedData = {
         ],
         "header": "Stay with a Superhost"
     },
-
+    singleVenue: {
+        "id": 3,
+        "uid": 1,
+        "title": "The Pondhouse - A Magical Place",
+        "location": " ENTIRE CABIN · ASHFIELD",
+        "rating": 4.75,
+        "guests": 2,
+        "pricePerNight": 238,
+        "details": "Romantic hideaway! This property has the lush beauty and privacy of Hana, without the drive! Only 15-20 minutes to the airport, 10 minutes to beaches, 2 minutes to restaurants and shops...on a private gated property with organic nursery. BEAUTIFUL!",
+        "amenities": "Wifi",
+        "imageUrl": "https://airbnb-clone-prexel-images.s3.amazonaws.com/waypoints/pondhouse.jpg",
+        "points": "Entire home,Self check-in,Sparkling clean,Superhost"
+    },
 }
 
 export default seedData
