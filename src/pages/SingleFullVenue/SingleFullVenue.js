@@ -7,6 +7,7 @@ import {
     GET_POINTS,
 } from '../../endpoints'
 import seedData from '../seedData';
+import Point from './Point';
 
 class SingleFullVenue extends Component {
 
@@ -43,7 +44,8 @@ class SingleFullVenue extends Component {
             .catch((ex) => {
                 this.setState({
                     venue: seedData.singleVenue,
-                    points: seedData.singleVenue.points
+                    points: seedData.singleVenue.points,
+                    pointsDescription: seedData.pointsDescription
                 })
             })
 
@@ -68,6 +70,10 @@ class SingleFullVenue extends Component {
 
     }
 
+    reserveNow = (e)=>{
+        console.log('User wants to reserve')
+    }
+
     render() {
         const venue = this.state.venue;
         const points = this.state.points
@@ -75,7 +81,12 @@ class SingleFullVenue extends Component {
         const generatePointsElements = () => {
             return points.map((point, i) => {
                 return (
-                    <div key={i}>{point}</div>
+                    <div key={i}>
+                        <Point
+                            pointsDescrption={this.state.pointsDescription}
+                            point={point}
+                        />
+                    </div>
                 )
             })
         }
@@ -86,12 +97,49 @@ class SingleFullVenue extends Component {
                     <img src={venue.imageUrl} />
                 </div>
                 <div className='col s8 location-details offset-s2'>
-                    <div className='location'>{venue.location}</div>
-                    <div className='title'>{venue.title}</div>
-                    <div className='guests'>{venue.guests}</div>
-                    <div className='divider' />
-                    <div>
-                        {generatePointsElements()}
+                    <div className='col s8 left-details'>
+                        <div className='location'>{venue.location}</div>
+                        <div className='title'>{venue.title}</div>
+                        <div className='guests'>{venue.guests}</div>
+                        <div className='divider' />
+                        <div>
+                            {generatePointsElements()}
+                        </div>
+                        <div className='details'>
+                            {venue.details}
+                        </div>
+                        <div className='amenities'>
+                            {venue.amenities}
+                        </div>
+                    </div>
+                    <div className='col s4 right-details'>
+                        <div className='price-per-day'>
+                            ${venue.pricePerNight} <span>per day</span>
+                        </div>
+                        <div className='rating'>{venue.rating}</div>
+                        <div className='col s6'>
+                            Check-In
+                            <input type='date'/>
+                        </div>
+                        <div className='col s6'>
+                            Check-Out
+                            <input type='date'/>
+                        </div>
+                        <div className='col s12'>
+                            <select className='browser-default'>
+                                <option value='1'>1 Guest</option>
+                                <option value='2'>2 Guests</option>
+                                <option value='3'>3 Guests</option>
+                                <option value='4'>4 Guests</option>
+                                <option value='5'>5 Guests</option>
+                                <option value='6'>6 Guests</option>
+                                <option value='7'>7 Guests</option>
+                                <option value='8'>8 Guests</option>
+                            </select>
+                        </div>
+                        <div className='col s12 center'>
+                            <button onClick={this.reserveNow} className='btn red accent-2'>Reserve</button>
+                        </div>
                     </div>
                 </div>
             </div>
