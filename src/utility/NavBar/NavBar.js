@@ -28,12 +28,18 @@ class NavBar extends Component {
                                 <li><Link to="/">$ USD</Link></li>
                                 <li><Link to="/">Become a host</Link></li>
                                 <li><Link to="/">Help</Link></li>
-                                <li onClick={() =>
+                                <li 
+                                onClick={() =>
                                     this.props.openModal('open', <SignUp />)
                                 }>
                                     Sign up
                                 </li>
-                                <li onClick={() =>
+                                <li 
+                                style={{
+                                    marginLeft: '15px',
+                                    marginRight: '5px'
+                                }}
+                                onClick={() =>
                                     this.props.openModal('open', <Login />)
                                 }>
                                     Log in
