@@ -136,3 +136,7 @@
     border: 1px solid #E4E4E4;
     margin: 25px 0px 15px;
 }
+
+.pointer {
+    cursor: pointer;
+}

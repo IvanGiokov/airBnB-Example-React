@@ -7,6 +7,28 @@ import openModal from '../../actions/openModal';
 
 class Login extends Component {
 
+    state = {
+        email: '',
+        password: ''
+    }
+
+    changeEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    changePassword = (e) => {
+        this.setState({
+            password: e.target.value
+        })
+    }
+
+    submitLogin = (e) => {
+        e.preventDefault()
+        console.log(this.state)
+    }
+
     render() {
         return (
             <div className="login-form">
@@ -17,12 +39,16 @@ class Login extends Component {
                         <span>or</span>
                         <div className="or-divider"></div>
                     </div>
-                    <input type="text" className="browser-default" placeholder="Email address" />
-                    <input type="password" className="browser-default" placeholder="Password" />
+                    <input type="text" className="browser-default" placeholder="Email address" onChange={this.changeEmail} />
+                    <input type="password" className="browser-default" placeholder="Password" onChange={this.changePassword} />
                     <button className="sign-up-button">Login</button>
                     <div className="divider"></div>
                     <div>Don't have an account?
                         <span
+                            className='pointer'
+                            style={{
+                                marginLeft: '5px'
+                            }}
                             onClick={
                                 () => {
                                     this.props.openModal('open', <SignUp />)
