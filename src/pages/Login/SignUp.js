@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import openModal from '../../actions/openModal';
 import axios from 'axios';
 import { REACT_APP_API_BASE_URL, POST_SIGNUP } from '../../endpoints'
+import swal from 'sweetalert';
+import regAction from '../../actions/regAction';
 
 class SignUp extends Component {
 
@@ -44,7 +46,35 @@ class SignUp extends Component {
             password: this.state.password
         }
         const response = await axios.post(requestUrl, data)
-        console.log(response.data)
+
+        const respMessage = response.data.msg;
+
+        ////
+        //response.data.msg could be:
+        //-invalidData
+        //-userAdded
+        //-userExists
+
+        if (respMessage === 'userExists') {
+            swal({
+                title: "Email Exists",
+                text: "The email you provided is already reqistered. Please you another email",
+                icon: "error",
+            })
+        } else if (respMessage === 'invalidData') {
+            swal({
+                title: "Invalid email/password",
+                text: "Please provide a valid email and password",
+                icon: "error",
+            })
+        } else if (respMessage === 'userAdded') {
+            swal({
+                title: "Success",
+                icon: "success",
+            })
+            //here we call our register action
+            this.props.regAction(response.data)
+        }
     }
 
     render() {
@@ -81,13 +111,20 @@ class SignUp extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    }
+}
+
 function mapDispatchToProps(dispatcher) {
     return bindActionCreators({
-        openModal: openModal
+        openModal: openModal,
+        regAction: regAction
     }, dispatcher)
 }
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
 const SignUpInputFields = (props) => {
 
