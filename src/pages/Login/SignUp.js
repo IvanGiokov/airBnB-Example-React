@@ -72,6 +72,7 @@ class SignUp extends Component {
                 title: "Success",
                 icon: "success",
             })
+            
             //here we call our register action
             this.props.regAction(response.data)
         }
