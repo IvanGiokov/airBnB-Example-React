@@ -12,6 +12,7 @@ react-redux
 # Redux related
 redux
 redux-promise
+redux-persist
 
 # CSS 
 Materialize
