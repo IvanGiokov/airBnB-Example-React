@@ -17,3 +17,4 @@ export const GET_POINTS = 'points/get'
 
 //SIGNUP LOGIN
 export const POST_SIGNUP = 'users/signup'
+export const POST_LOGIN = 'users/login'

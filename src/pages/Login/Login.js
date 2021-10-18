@@ -4,6 +4,13 @@ import SignUp from './SignUp';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import openModal from '../../actions/openModal';
+import regAction from '../../actions/regAction';
+import {
+    REACT_APP_API_BASE_URL,
+    POST_LOGIN
+} from '../../endpoints';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 class Login extends Component {
 
@@ -24,9 +31,49 @@ class Login extends Component {
         })
     }
 
-    submitLogin = (e) => {
+    submitLogin = async (e) => {
         e.preventDefault()
-        console.log(this.state)
+        const requestUrl = `${REACT_APP_API_BASE_URL}/${POST_LOGIN}`
+        const reqData = {
+            email: this.state.email,
+            password: this.state.password
+        }
+
+        const response = await axios.post(requestUrl, reqData)
+
+        const respMessage = response.data.msg
+
+        ////
+        //response.data.msg could be:
+        //errors:
+        //-badPass
+        //-noEmail
+        //success:
+        //-loggedIn
+
+        if (respMessage === 'badPass') {
+            swal({
+                title: "Wrong password",
+                text: "The password you have provided does not match the email address",
+                icon: "error",
+            })
+        } else if (respMessage === 'noEmail') {
+            swal({
+                title: "Email does not exist",
+                text: "The email you have provided does not have a registration",
+                icon: "error",
+            })
+        } else if (respMessage === 'loggedIn') {
+            swal({
+                title: "Success",
+                icon: "success",
+            })
+
+            //here we call our register action
+            this.props.regAction(response.data)
+            this.props.openModal('closed', '')
+        }
+
     }
 
     render() {
@@ -64,7 +111,8 @@ class Login extends Component {
 
 function mapDispatchToProps(dispatcher) {
     return bindActionCreators({
-        openModal: openModal
+        openModal: openModal,
+        regAction: regAction
     }, dispatcher)
 }
 

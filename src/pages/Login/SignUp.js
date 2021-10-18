@@ -75,6 +75,7 @@ class SignUp extends Component {
             
             //here we call our register action
             this.props.regAction(response.data)
+            this.props.openModal('closed' ,'')
         }
     }
 
