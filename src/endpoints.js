@@ -14,6 +14,7 @@ export const GET_VENUES_RECOMMENDED =  'venues/recommended'
 export const GET_VENUES_SUPERHOST = 'venues/superHost'
 export const GET_SINGLE_VENUE = 'venue'
 export const GET_POINTS = 'points/get'
+export const GET_CITY_VENUES = 'venues/city'
 
 //SIGNUP LOGIN
 export const POST_SIGNUP = 'users/signup'
