@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import SingleFullVenue from './pages/SingleFullVenue/SingleFullVenue';
 import Modal from './utility/Modal/Modal';
 import CityVenues from './pages/CityVenues/CityVenues';
+import './App.css'
 
 class App extends Component {
   render() {
