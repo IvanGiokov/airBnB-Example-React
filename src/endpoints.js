@@ -19,3 +19,6 @@ export const GET_CITY_VENUES = 'venues/city'
 //SIGNUP LOGIN
 export const POST_SIGNUP = 'users/signup'
 export const POST_LOGIN = 'users/login'
+
+//STRIPE
+export const PAYMENT_CREATE_SESSION = 'payment/create-session'

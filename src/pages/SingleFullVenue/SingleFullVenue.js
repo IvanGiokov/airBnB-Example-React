@@ -5,6 +5,7 @@ import {
     REACT_APP_API_BASE_URL,
     GET_SINGLE_VENUE,
     GET_POINTS,
+    PAYMENT_CREATE_SESSION,
 } from '../../endpoints'
 import seedData from '../seedData';
 import Point from './Point';
@@ -92,10 +93,10 @@ class SingleFullVenue extends Component {
     
         const startDayMoment = moment(this.state.checkIn);
         const ednDayMoment = moment(this.state.checkOut);
-        console.log(startDayMoment)
-        console.log(ednDayMoment)
 
         const diffDays = ednDayMoment.diff(startDayMoment, 'days');
+        const pricePerNight = this.state.venue.pricePerNight;
+        const totalPrice = pricePerNight * diffDays;
 
         if(diffDays < 1){
             swal({
@@ -135,8 +136,28 @@ class SingleFullVenue extends Component {
 
             const stripe = window.Stripe(stripePublicKey)
 
-            const pricePerNight = this.state.venue.pricePerNight;
-            const totalPrice = pricePerNight * diffDays;
+            const stripeSessionURL = `${REACT_APP_API_BASE_URL}/${PAYMENT_CREATE_SESSION}`
+            const stripeData = {
+                venueData: this.state.venue, 
+                totalPrice, 
+                diffDays,
+                pricePerNight, 
+                checkIn: this.state.checkIn,
+                checkOut: this.state.checkOut, 
+                token: this.props.auth.token, 
+                numberOfGuest: this.state.numberOfGuests,
+                currency: 'USD'
+            }
+
+            const sessionVar = await axios.post(stripeSessionURL, stripeData)
+            // console.log(sessionVar)
+
+            stripe.redirectToCheckout({
+                sessionId: sessionVar.data.id
+            }).then((result) => {
+                //only if the network fails.this will run
+                console.log(result)
+            })
         }
 
     }
