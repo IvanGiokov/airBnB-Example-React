@@ -22,3 +22,6 @@ export const POST_LOGIN = 'users/login'
 
 //STRIPE
 export const PAYMENT_CREATE_SESSION = 'payment/create-session'
+
+//PAYMENT OUTCOME
+export const PAYMENT_SUCCESS = 'payment/success'
