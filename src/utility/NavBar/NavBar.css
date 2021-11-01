@@ -14,7 +14,7 @@
     cursor: pointer;
 }
 
-.nav ul li.login-signup {
+.nav ul li.login-signup{
     margin-right: 15px;
 }
 
@@ -32,6 +32,7 @@
     background-color: initial;    
 }
 
-.brand-logo{
+.logout {
     margin-left: 10px;
+    padding-right: 5px;
 }
