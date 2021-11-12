@@ -61,7 +61,7 @@ class Account extends Component {
                         />
                         {/*First way of passing props to Components in Routes */}
                         <Route exact path='/account/reservations/confirmed' render={() => {
-                            return <Bookings type='upcoming' bookings={upcomingBookings} />
+                            return <Bookings type='upcoming' bookings={upcomingBookings} token={this.props.auth.token} />
                         }} />
                         {/*Second way of passing props to Components in Routes */}
                         <Route exact path='/account/reservations/past'>

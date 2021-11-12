@@ -28,3 +28,4 @@ export const PAYMENT_SUCCESS = 'payment/success'
 
 //BOOKINGS 
 export const GET_BOOKINGS = 'users/getBookings '
+export const POST_CANCEL_RESERVATION = 'reservation/cancel'

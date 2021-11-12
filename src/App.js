@@ -7,6 +7,7 @@ import Modal from './utility/Modal/Modal';
 import CityVenues from './pages/CityVenues/CityVenues';
 import PaymentSuccess from './pages/PaymentSucces/PaymentSuccess';
 import Account from './pages/Account/Account';
+import Search from './pages/Search/Search'
 import './App.css'
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <Route exact path='/venue/:vid' component={SingleFullVenue} />
         <Route exact path='/city/:cityName' component={CityVenues} />
         <Route exact path='/payment-success/:stripeToken' component={PaymentSuccess} />
+        <Route exact path='/search/:location' component={Search} />
         <Route path='/account' component={Account} />
         <Route path='/' component={Modal} />
       </Router>
