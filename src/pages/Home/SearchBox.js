@@ -1,16 +1,27 @@
 import React, { Component, useState } from 'react';
-import './SearchBox.css'
+import './SearchBox.css';
+import useControlledInput from '../../customHooks/useControlledInput';
 
 //HOOKS VERSION
 function SearchBox(props) {
-    const [where, setWhere] = useState('');
-    const [checkIn, setCheckIn] = useState('');
-    const [checkOut, setCheckOut] = useState('');
-    const [guests, setGuests] = useState(0)
+
+    //USING CUSTOM HOOKS
+    const where = useControlledInput('');
+    const checkIn = useControlledInput('');
+    const checkOut = useControlledInput('');
+    const guests = useControlledInput(0);
+
+
+
+    //USING USESTATE HOOK
+    // const [where, setWhere] = useState('');
+    // const [checkIn, setCheckIn] = useState('');
+    // const [checkOut, setCheckOut] = useState('');
+    // const [guests, setGuests] = useState(0)
 
     const submitSearch = (e) => {
         e.preventDefault()
-        props.history.push(`/search/${where}`)
+        props.history.push(`/search/${where.value}`)
     }
 
     return (
@@ -24,8 +35,11 @@ function SearchBox(props) {
                             // className='browser-default'
                             type='text'
                             placeholder='Anywhere'
-                            value={where}
-                            onChange={(e) => setWhere(e.target.value)}
+                            //using the custom hook
+                            {...where}
+                            //or put them into separate lines
+                            // value={where.value}
+                            // onChange={(e) => where.onchange(e)}
                         />
                     </div>
                 </div>
@@ -35,8 +49,9 @@ function SearchBox(props) {
                         <input
                             // className='browser-default'
                             type='date'
-                            value={checkIn}
-                            onChange={(e) => setCheckIn(e.target.value)}
+                            {...checkIn}
+                            // value={checkIn.value}
+                            // onChange={(e) => checkIn.onchange(e)}
                         />
                     </div>
                 </div>
@@ -46,8 +61,9 @@ function SearchBox(props) {
                         <input
                             // className='browser-default'
                             type='date'
-                            value={checkOut}
-                            onChange={(e) => setCheckOut(e.target.value)}
+                            {...checkOut}
+                            // value={checkOut.value}
+                            // onChange={(e) => checkOut.onchange(e)}
                         />
                     </div>
                 </div>
@@ -58,8 +74,9 @@ function SearchBox(props) {
                             // className='browser-default'
                             type='number'
                             placeholder='Number of Guests'
-                            value={guests}
-                            onChange={(e) => setGuests(e.target.value)}
+                            {...guests}
+                            // value={guests.value}
+                            // onChange={(e) => guests.onchange(e)}
                         />
                     </div>
                 </div>
