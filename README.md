@@ -1,4 +1,4 @@
-# React app, utilizing Redux State Management, FR authentication and Stripe integration
+# React app, utilizing Redux State Management, FR authentication, Stripe integration, Custom Hooks
 
 # Used libraries and packages
 
