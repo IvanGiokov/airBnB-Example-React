@@ -67,7 +67,7 @@ function Login(props) {
             //     type: 'REGISTER_ACTION',
             //     payload: response.data
             // })
-            disptach(openModal('closed', ''))
+            // disptach(openModal('closed', ''))
         }
     }
 
